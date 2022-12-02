@@ -2,13 +2,21 @@
 % version (use Makefile to regenerate from git)
 \def\frogspecversion{\input{tmp/version}}
 
+% author block customization
+\renewcommand{\Affilfont}{\it\small}
+\setlength{\affilsep}{1ex}
+
 % numberless section
 \def\chapwithtoc#1{
 \chapter*{#1}
 \addcontentsline{toc}{chapter}{#1}
 }
 
+% section customization
 \def\chaptername{Part}
+\makeatletter
+\renewcommand{\float@listhead}[1]{\chapwithtoc{#1}}
+\makeatother
 
 % make typesetting ugly only in really bad cases
 \overfullrule=3mm
