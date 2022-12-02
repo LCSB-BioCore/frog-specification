@@ -1,0 +1,36 @@
+
+% version (use Makefile to regenerate from git)
+\def\frogspecversion{\input{tmp/version}}
+
+% numberless section
+\def\chapwithtoc#1{
+\chapter*{#1}
+\addcontentsline{toc}{chapter}{#1}
+}
+
+\def\chaptername{Part}
+
+% make typesetting ugly only in really bad cases
+\overfullrule=3mm
+\emergencystretch=1em
+
+% code listing environment
+\DeclareNewFloatType{listing}{}
+\floatsetup[listing]{style=ruled}
+\floatname{listing}{Listing}
+\numberwithin{listing}{chapter}
+
+% setup captions
+\DeclareCaptionStyle{spec}{style=base,font={small,sf},labelfont=bf,labelsep=quad}
+\captionsetup{style=spec}
+\captionsetup[listing]{style=spec,singlelinecheck=off}
+
+% code formatting
+\lstset{
+  showstringspaces=false,
+  basicstyle=\footnotesize\tt\color{black!75},
+  identifierstyle=\bfseries\color{black},
+  commentstyle=\color{green!50!black},
+  stringstyle=\color{red!50!black},
+  keywordstyle=\color{blue!75!black}
+}
