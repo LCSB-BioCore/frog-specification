@@ -2,3 +2,8 @@
 *.aux
 *.log
 tmp/
+/pdfa.xmpi
+/frog.*
+/refs.*
+!/frog.tex
+!/refs.bib
