@@ -1,0 +1,26 @@
+name: CI
+
+on:
+  push:
+    branches:
+      - master
+    tags: '*'
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  build:
+    name: Build specification PDF
+    runs-on: ubuntu-latest
+    container: { image: 'aergus/latex' }
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: Build
+        run: make
+      - name: Upload artifacts
+        uses: actions/upload-artifact@v3
+        with:
+          name: FROG specification
+          path: |
+            frog.pdf
