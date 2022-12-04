@@ -1,23 +1,88 @@
 \chapter{FROG report format}
 
+A FROG report contains information about one model present in one file.
+The report consists of several files that must be saved in a single directory structure, such as in a single folder or in a single subdirectory of an archive file (see \cref{sec:archives}).
+Independently of the storage method, the report files should be extractable into a single filesystem-level directory to allow easy data access for various tools.
+
+\section{Archive files with FROG reports}
+\label{sec:archives}
+
+FROG reports may be stored and distributed in archives of formats such as ZIP (with extension \texttt{.zip}) or tarballs (with extensions \texttt{.tar.gz} or \texttt{.tar.bz2}).
+Tool authors should ensure that the suitable compression method is available on as many platforms as possible. Using ZIP archives is recommended.
+
+The archive file must contain the report files in the top-level directory (i.e., no subdirectories should be used).
+
+As a special case, the files may be stored in the OMEX format.
+\todo{Can someone who knows OMEX fill in this section?}
+
 \section{Directory layout}
+\label{sec:files}
 
-\subsection{OMEX}
+The required files that must be present in a FROG report are listed in \cref{tab:files}. Formatting and contents of the files are described in the following sections (also referenced from the table).
 
-?
+\begin{table}\footnotesize\sffamily
+\begin{tabular}{lp{.3\linewidth}ll}
+\toprule
+File name & Contents & Format & Description \\
+\midrule
+\texttt{00\_metadata.json}
+ & Basic information about the model file, information about the FROG report software.
+ & JSON (\cref{sec:json})
+ & \cref{sec:meta}
+ \\\addlinespace
+\texttt{01\_objective.json}
+ & Expected optimal objective values.
+ & TSV (\cref{sec:tsv})
+ & \cref{sec:obj}
+ \\\addlinespace
+\texttt{02\_fva.json}
+ & Expected reaction flux variability at the model optima.
+ & TSV (\cref{sec:tsv})
+ & \cref{sec:fva}
+ \\\addlinespace
+\texttt{03\_gene\_deletion.json}
+ & Expected behavior of the model under single-gene deletions.
+ & TSV (\cref{sec:tsv})
+ & \cref{sec:genes}
+ \\\addlinespace
+\texttt{04\_reaction\_deletion.json}
+ & Expected behavior of the model under single-reaction deletions.
+ & TSV (\cref{sec:tsv})
+ & \cref{sec:rxns} \\
+\bottomrule
+\end{tabular}
+\caption{Files required in a FROG report.}
+\label{tab:files}
+\end{table}
 
-\section{File formats}
+\section{Report file formats}
 
-\subsection{TSV}
+This section describes the encoding of information into file contents used by FROG reports.
 
 \subsection{JSON}
+\label{sec:json}
 
-\section{Metadata file}
+JSON-formatted FROG report files must adhere to the JSON formatting as specified by RFC~8259~\cite{rfc8259}.
+The character encoding of the JSON-formatted file must be UTF-8 (see \cite[Section 8.1]{rfc8259}).
 
-\section{Objective value report file}
+Individual files may require adherence to a specified JSON schema, which shall be provided in JSONS format in the respective section that describe the files' contents.
 
-\section{Flux variability report file}
+\subsection{TSV}
+\label{sec:tsv}
 
-\section{Reaction deletion report file}
+\section{Report file contents}
 
-\section{Gene deletion report file}
+\subsection{Metadata file}
+\label{sec:meta}
+
+\subsection{Objective value report file}
+\label{sec:obj}
+
+\subsection{Flux variability report file}
+\label{sec:fva}
+
+\subsection{Gene deletion report file}
+\label{sec:genes}
+
+\subsection{Reaction deletion report file}
+\label{sec:rxns}

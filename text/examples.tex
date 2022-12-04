@@ -1,2 +1,33 @@
 \chapter{Example reports}
 
+\section{Escherichia coli ``core'' report}
+
+An expected form of a FROG report is given in listings in this section. The
+following example files describe the contents of the toy E.~coli SBML
+model~\cite{orth2010reconstruction}, as available from
+BiGG\footnote{\url{http://bigg.ucsd.edu/models/e_coli_core}}:
+\begin{itemize}
+\item \verb|00_metadata.json| in \cref{lst:ecoli-meta}
+\item \verb|01_objective.tsv| in \cref{lst:ecoli-obj}
+\item \verb|02_fva.tsv| in \cref{lst:ecoli-fva}
+\item \verb|03_gene_deletion.tsv| in \cref{lst:ecoli-genes}
+\item \verb|04_reaction_deletion.tsv| in \cref{lst:ecoli-rxns}
+\end{itemize}
+
+\begin{listing}
+\lstinputlisting[language=json]{data/ecoli/00_metadata.json}
+\caption[E.~coli core metadata JSON]{FROG metadata file \texttt{00\_metadata.json} in JSON format as generated from \texttt{e\_coli\_core.xml}.}
+\label{lst:ecoli-meta}
+\end{listing}
+
+\begin{listing}
+\lstinputlisting[language=tsv]{data/ecoli/01_objective.tsv}
+\caption[E.~coli core objective report]{FROG objective report \texttt{01\_objective.tsv} in TSV format as generated from \texttt{e\_coli\_core.xml}.}
+\label{lst:ecoli-obj}
+\end{listing}
+
+\begin{listing}
+\lstinputlisting[language=tsv]{data/ecoli/02_fva.tsv}
+\caption[E.~coli core variability report]{FROG flux variability report \texttt{02\_fva.tsv} in TSV format as generated from \texttt{e\_coli\_core.xml}.}
+\label{lst:ecoli-fva}
+\end{listing}

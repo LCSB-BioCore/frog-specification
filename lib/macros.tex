@@ -34,11 +34,32 @@
 \captionsetup[listing]{style=spec,singlelinecheck=off}
 
 % code formatting
-\lstset{
-  showstringspaces=false,
-  basicstyle=\footnotesize\tt\color{black!75},
-  identifierstyle=\bfseries\color{black},
+\lstdefinelanguage{tsv}{
+  showtabs=true,
+  tabsize=20,
+  tab={\color{black!15}$\to\hskip -1pt\shortmid$},
+  keywords={optimal,infeasible},
+  basicstyle=\tiny\ttfamily\color{black},
+  identifierstyle=\color{black!66},
   commentstyle=\color{green!50!black},
   stringstyle=\color{red!50!black},
   keywordstyle=\color{blue!75!black}
 }
+
+\lstdefinelanguage{json}{
+  breaklines=true,
+  string=[s]{"}{"},
+  morestring=[s]{'}{'},
+  keywords={\{,\},[,]},
+  showstringspaces=true,
+  basicstyle=\tiny\ttfamily\color{black!75},
+  identifierstyle=\bfseries\color{yellow},
+  commentstyle=\color{green!50!black},
+  stringstyle=\color{red!50!black},
+  keywordstyle=\color{blue!75!black},
+}
+
+% TO-DO lists
+\renewcommand{\todoformat}{\itshape\color{red}}
+\let\oldtodo=\todo
+\renewcommand{\todo}[1]{\oldtodo[#1]{}}
