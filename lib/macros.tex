@@ -18,6 +18,9 @@
 \renewcommand{\float@listhead}[1]{\chapwithtoc{#1}}
 \makeatother
 
+% table format shortcut
+\def\tablefont{\footnotesize\sffamily}
+
 % make typesetting ugly only in really bad cases
 \overfullrule=3mm
 \emergencystretch=1em
@@ -34,12 +37,20 @@
 \captionsetup[listing]{style=spec,singlelinecheck=off}
 
 % code formatting
+\lstset{
+  basicstyle=\scriptsize\ttfamily\color{black},
+  identifierstyle=\color{black!66},
+  commentstyle=\color{green!50!black},
+  stringstyle=\color{red!50!black},
+  keywordstyle=\color{blue!75!black}
+}
+
 \lstdefinelanguage{tsv}{
   showtabs=true,
   tabsize=20,
   tab={\color{black!15}$\to\hskip -1pt\shortmid$},
   keywords={optimal,infeasible},
-  basicstyle=\tiny\ttfamily\color{black},
+  basicstyle=\scriptsize\ttfamily\color{black},
   identifierstyle=\color{black!66},
   commentstyle=\color{green!50!black},
   stringstyle=\color{red!50!black},
@@ -52,7 +63,7 @@
   morestring=[s]{'}{'},
   keywords={\{,\},[,]},
   showstringspaces=true,
-  basicstyle=\tiny\ttfamily\color{black!75},
+  basicstyle=\scriptsize\ttfamily\color{black!75},
   identifierstyle=\bfseries\color{yellow},
   commentstyle=\color{green!50!black},
   stringstyle=\color{red!50!black},

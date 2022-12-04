@@ -14,6 +14,8 @@ BiGG\footnote{\url{http://bigg.ucsd.edu/models/e_coli_core}}:
 \item \verb|04_reaction_deletion.tsv| in \cref{lst:ecoli-rxns}
 \end{itemize}
 
+\todo{invent a way to smash the listings to the page}
+
 \begin{listing}
 \lstinputlisting[language=json]{data/ecoli/00_metadata.json}
 \caption[E.~coli core metadata JSON]{FROG metadata file \texttt{00\_metadata.json} in JSON format as generated from \texttt{e\_coli\_core.xml}.}
@@ -30,4 +32,16 @@ BiGG\footnote{\url{http://bigg.ucsd.edu/models/e_coli_core}}:
 \lstinputlisting[language=tsv]{data/ecoli/02_fva.tsv}
 \caption[E.~coli core variability report]{FROG flux variability report \texttt{02\_fva.tsv} in TSV format as generated from \texttt{e\_coli\_core.xml}.}
 \label{lst:ecoli-fva}
+\end{listing}
+
+\begin{listing}
+\lstinputlisting[language=tsv]{data/ecoli/03_gene_deletion.tsv}
+\caption[E.~coli core gene deletion report]{FROG gene deletion report \texttt{03\_gene\_deletion.tsv} in TSV format as generated from \texttt{e\_coli\_core.xml}.}
+\label{lst:ecoli-genes}
+\end{listing}
+
+\begin{listing}
+\lstinputlisting[language=tsv]{data/ecoli/04_reaction_deletion.tsv}
+\caption[E.~coli core reaction deletion report]{FROG reaction deletion report \texttt{03\_reaction\_deletion.tsv} in TSV format as generated from \texttt{e\_coli\_core.xml}.}
+\label{lst:ecoli-rxns}
 \end{listing}
