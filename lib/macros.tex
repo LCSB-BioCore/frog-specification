@@ -1,6 +1,7 @@
 
 % version (use Makefile to regenerate from git)
-\def\frogspecversion{\input{tmp/version}}
+\input{tmp/version}
+\def\frogrepobase{https://github.com/exaexa/frog-spec/blob/\frogspeccommit}
 
 % author block customization
 \renewcommand{\Affilfont}{\it\small}
@@ -13,7 +14,8 @@
 }
 
 % section customization
-\def\chaptername{Part}
+\crefname{chapter}{section}{sections}
+\Crefname{chapter}{Section}{Sections}
 \makeatletter
 \renewcommand{\float@listhead}[1]{\chapwithtoc{#1}}
 \makeatother
