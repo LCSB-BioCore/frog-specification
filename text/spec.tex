@@ -1,4 +1,5 @@
 \chapter{FROG report format}
+\label{chap:spec}
 
 A FROG report contains information about one model present in one file.
 The report consists of several files that must be saved in a single directory structure, such as in a single folder or in a single subdirectory of an archive file (see \cref{sec:archives}).
@@ -250,7 +251,7 @@ Column & Format & Value \\
 
 For each objective that is described by the model file and for each reaction, the gene deletion report contains an entry that describes the achievable objective value if the given gene is knocked out (i.e., all reactions that depend on the gene to carry flux are either deleted or constrained to zero flux). The required columns and the format and semantics of the entries is specified in~\cref{tab:genefields}.
 
-\todo{is there a good reference for the gene deletion algorithm? AFAIK it is formally called DNF falsifiability?}
+The gene deletion algorithm must be compatible with the single gene knockout procedure described in~\cref{sec:algos}.
 
 \begin{table}[p]\tablefont
 \begin{tabular}{llp{30em}}
