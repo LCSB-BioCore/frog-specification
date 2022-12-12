@@ -127,58 +127,70 @@ The contents of the metadata file is formatted as JSON that contains a single JS
 \item describing the software that was used to generate the report.
 \end{itemize}
 
-The expected properties and sub-properties of the JSON object are listed in \cref{tab:metafields}. The fields labeled as `required' must be present in a FROG report. The fields labeled as `optional' may be present, but the software should implement generation and testing of these fields.
+The expected properties and sub-properties of the JSON object are listed in \cref{tab:metafields}. The fields labeled as `required' must be present in a FROG report. The fields labeled as `optional' should be present and the software should implement generation and testing of these fields, but the report is valid even with the models missing.
 
 The JSON schema that may be used to validate the JSON metadata format is shown in \cref{chap:schema}.
 
 \begin{table}[p]\tablefont
-\begin{tabular}{lp{30em}l}
+\begin{tabular}{llp{30em}}
 \toprule
-Field & Description & Presence \\
+Field & Presence & Description \\
 \midrule
 \verb|model.filename|
- & expected basename of the model file, such as \verb|e_coli_core.xml|
  & required
+ & expected basename of the model file, such as \verb|e_coli_core.xml|
  \\
 \verb|model.md5|
- & 32-hexadecimal-digit MD5 hash~\cite{rfc1321} of the model file contents
  & required
+ & 32-hexadecimal-digit MD5 hash~\cite{rfc1321} of the model file contents
  \\
 \verb|model.sha256|
- & 64-hexadecimal-digit SHA256 hash~\cite{national2008secure} of the model file contents
  & optional
+ & 64-hexadecimal-digit SHA256 hash~\cite{national2008secure} of the model file contents
+ \\
+\verb|model.url|
+ & optional
+ & URL where the model file can be obtained, preferably pointing to a long-term archival repository
+ \\
+\verb|model.development.url|
+ & optional
+ & URL of a website or public repository where the model is developed, preferably offering a chance to contact the model authors or submit corrections of the model
+ \\
+\verb|model.version|
+ & optional
+ & version string of the model, if available
  \\
 \verb|environment|
- & free-text description of the software environment, such as from \verb|uname -a|
  & required
+ & free-text description of the software environment used to run FROG analysis tools, such as from \verb|uname -a|
  \\
-\verb|software.name|
+\verb|software|$\to$\verb|name|
+ & required
  & name of the FROG report generator software
- & required
  \\
-\verb|software.version|
+\verb|software|$\to$\verb|version|
+ & required
  & version of the software
- & required
  \\
-\verb|software.url|
+\verb|software|$\to$\verb|url|
+ & optional
  & URL of the software homepage
- & optional
  \\
-\verb|solver.name|
+\verb|solver|$\to$\verb|name|
+ & required
  & name of the solver used to compute the reported values
- & required
  \\
-\verb|solver.version|
+\verb|solver|$\to$\verb|version|
+ & required
  & version of the solver
- & required
  \\
-\verb|solver.url|
- & URL of the solver homepage
+\verb|solver|$\to$\verb|url|
  & optional
+ & URL of the solver homepage
  \\
 \bottomrule
 \end{tabular}
-\caption[Contents of the FROG metadata file.]{Contents of the FROG metadata file. Names that contain a dot (\texttt{.}) represent properties of nested objects in the usual JavaScript object property access notation.}
+\caption[Contents of the FROG metadata file.]{Contents of the FROG metadata file. Names that contain an arrow ($\to$) represent properties of nested objects.}
 \label{tab:metafields}
 \end{table}
 
