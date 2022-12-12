@@ -1,9 +1,7 @@
 \chapter{Background and rationale}
 
-% This is based on the curation/FBC biomodels site. We might want to keep these in sync.:
-Constraint-based models are used to investigate metabolism in diverse conditions; particularly genome-scale metabolic models (GEMs) with thousands of reactions provide opportunities to analyze organism-specific metabolism. Community standards for consistent model reconstruction, curation, and sharing are crucial to ensure reproducibility, reliability, and FAIR sharing of the models. MEMOTE, a community tool was developed for standardized quality assessment of the models.
-
-It is complicated to assess whether constraint-based models, including GEMs, are reproducible, because these models often have multiple solutions and the numerical values are not always enumerated in the published manuscripts. FROG is a community effort for standardized assessment of model reproducibility.
+% This is based on the curation/FBC biomodels site. We might want to keep these in sync after chances made to the text.
+Genome-scale metabolic models (GEMs) are a mathematical representation of organism-specific metabolism. Constraint-based analyses of GEMs can be used to investigate metabolic phenomena under diverse conditions \textit{in silico}.  Community standards for consistent model reconstruction, curation, and sharing are crucial to ensure reproducibility, reliability, and FAIR\todo{need to define this acronym} sharing of the models. Partially addressing these challenges, MEMOTE\todo{Need to define this acronym or cite it} was developed as a community tool for standardized quality assessment of the models. However, it is complicated to assess whether constraint-based models, including GEMs, are reproducible, because these models often have multiple solutions, and their numerical values are not always enumerated in the published manuscripts. FROG is a community effort for standardized assessment of model reproducibility.
 
 Reproducibility of results is the cornerstone of science and its assessment is an essential part of the curation of a model in the repository such as BioModels. Following discussions at dedicated breakout sessions at HARMONY2020\footnote{\url{https://docs.google.com/document/d/135Us6bOWaK4vr1ZClAXwWOjmmykEEwx_geSR8wJEmEY/edit?usp=sharing}}, COMBINE2020\footnote{\url{https://docs.google.com/document/d/1yGI5iAq_lTm1BNCb6GM0o0zlMNPRc6yOJv0iZHGTvOA/edit?usp=sharing}}, and HARMONY2021\footnote{\url{https://docs.google.com/document/d/1j62z9loPasxZ32t9S9eR6stO9ZHkBq9kDvhxG98lnmA/edit?usp=sharing}}, FROG analysis was developed as an ensemble of analyses of constraint-based models that generate standardized, numerically reproducible reference dataset for a given model, called a \emph{FROG report}. A corresponding collection of tools that generates FROG reports in a standardized schema was implemented. We propose that the modelers share FROG reports along with their model, which can be used by the modeler or curator to independently assess the reproducibility of a model, and ensure that the model data users can validate the results of their model interpretation.
 
@@ -19,12 +17,14 @@ Requirement level of the wording used in technical sections of this specificatio
 
 For the purposes of FROG, \emph{model} means exclusively a metabolic model encoded in the SBML format~\cite{hucka2003systems,keating2020sbml} with FBC extension~\cite{olivier2018sbmlfbc}.
 
-\todo{specify `model user'}
+Finally, model user is meant to indicate the person running COBRA
+(constraint-based reconstruction and analysis) algorithms on the model, as
+defined above. 
 
 \subsection{Metabolic model contents and algorithms}
 \label{sec:algos}
 
-Following the SBML-FBC specification, the model must uniquely specify a matrix $S$ (stoichiometry matrix), vectors $u$ (upper bounds), $l$ (lower bounds), and a finite sequence of vectors $c_i$ (an objective vector for each $i$) that define a valid set of optimization problems:
+Following the SBML-FBC specification, the model must uniquely specify a matrix $S$ (stoichiometry matrix), vectors $u$ (upper bounds), $l$ (lower bounds), and a finite sequence of vectors $c_i$ (an objective vector for each $i$) that define a valid set of optimization problems:\todo{This is not general enough. What about constraints like $A x  \leq b$ that crop up in enzyme constrained models?}
 \begin{align*}
 \max_x\ c_i^\intercal &\cdot x \\
 \text{such that}\quad
