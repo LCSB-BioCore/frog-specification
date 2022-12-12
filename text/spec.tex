@@ -1,19 +1,19 @@
 \chapter{FROG report format}
 \label{chap:spec}
 
-A FROG report contains information about one model present in one file.
-The report consists of several files that must be saved in a single directory structure, such as in a single folder or in a single subdirectory of an archive file (see \cref{sec:archives}).
+A FROG report contains information about one model present in one file (the input).
+The report (the output) consists of several files that must be saved in a single directory structure, such as in a single folder or in a single subdirectory of an archive file (see \cref{sec:archives}).
 Independently of the storage method, the report files should be extractable into a single filesystem-level directory to allow easy data access for various tools.
 
 \section{Archive files with FROG reports}
 \label{sec:archives}
 
 FROG reports may be stored and distributed in archives of formats such as ZIP (with extension \texttt{.zip}) or tarballs (with extensions \texttt{.tar.gz} or \texttt{.tar.bz2}).
-Tool authors should ensure that the suitable compression method is available on as many platforms as possible. Using ZIP archives is recommended.
+Tool authors should ensure that the chosen compression method is available on as many platforms as possible. Using ZIP archives is recommended.
 
 The archive file must contain the report files in the top-level directory (i.e., no subdirectories should be used).
 
-As a special case, the files may be stored in the OMEX format, as specified by \citeauthor{bergmann2014omex}. The identifiers for individual FROG files are listed in~\cref{sec:files} (\cref{tab:omex}).
+As a special case, the files may be stored in the OMEX format, as specified by \citeauthor{bergmann2014omex}. The identifiers for individual FROG files are listed in~\cref{sec:files} (\cref{tab:omex}). \todo{Mo: Why have a special case?}
 
 \section{Directory layout}
 \label{sec:files}
@@ -91,7 +91,7 @@ This section describes the encoding of information into file contents used by FR
 JSON-formatted FROG report files must adhere to the JSON formatting as specified by RFC~8259~\cite{rfc8259}.
 The character encoding of the JSON-formatted file must be UTF-8 (see \cite[][section 8.1]{rfc8259}).
 
-Individual files may require adherence to a specified JSON schema, which shall be provided in JSONS format in the respective section that describe the files' contents.
+Individual files may require adherence to a specified JSON schema, which shall be provided in JSON format in the respective section that describe the files' contents.
 
 \subsection{TSV}
 \label{sec:tsv}
@@ -153,7 +153,7 @@ Field & Presence & Description \\
  & URL where the model file can be obtained, preferably pointing to a long-term archival repository
  \\
 \verb|model.development.url|
- & optional
+ & optional\todo{required}
  & URL of a website or public repository where the model is developed, preferably offering a chance to contact the model authors or submit corrections of the model
  \\
 \verb|model.version|
@@ -182,7 +182,7 @@ Field & Presence & Description \\
  \\
 \verb|solver|$\to$\verb|version|
  & required
- & version of the solver
+ & version of the solver\todo{what about solver settings?}
  \\
 \verb|solver|$\to$\verb|url|
  & optional
