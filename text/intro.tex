@@ -35,7 +35,7 @@ S\cdot x &= 0
 
 The model must specify a sequence of identifiers $g$ where $g_i$ is the identifier of $i$-th gene, and $r$ where $r_i$ is the identifier of the $i$-th reaction and $|r| = |u| = |l|$.
 
-Additionally, for each reaction the model must specify a Boolean formula $G_i$ (for $i$-th reaction) over variables labeled as $g_i$ (for $i$-th gene), giving the reaction-gene associations. The reaction-gene association formulas must possess an efficient evaluation method for a given assignment of variables, and should be preferably represented in disjunctive normal form (DNF, defined as $\bigvee_i\bigwedge_j o_{i,j}(g_j)$ where $(\forall i,j)\ o_{i,j}(x) \in \{x, \neg x, \top\}$).
+Additionally, for each reaction the model must specify a Boolean formula $G_i$ (for $i$-th reaction) over variables labeled as $g_i$ (for $i$-th gene), giving the reaction-gene associations. The reaction-gene association formulas must possess an efficient evaluation method for a given assignment of variables, and should be preferably represented in disjunctive normal form (DNF, defined as $\bigvee_i\bigwedge_j o_{i,j}(g_j)$ where $(\forall i,j)\ o_{i,j}(x) \in \{x, \neg x, \top\}$). The gene associations may be specified implicitly by the metabolic model specification or by software assumption; as a common treatment of incomplete data the modeling software may assume missing gene association formulas to be tautologies ($\top$).
 
 \emph{Flux balance analysis (FBA) solution} for a given objective $i$ is any of the vectors $x$ in the above optimization problem that maximize the \emph{objective value} $c_i^\intercal \cdot x$.
 
