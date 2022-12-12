@@ -34,6 +34,10 @@
 \floatsetup[listing]{style=ruled}
 \floatname{listing}{Listing}
 \numberwithin{listing}{chapter}
+\makeatletter
+\def\sidewayslisting{\@rotfloat{listing}}
+\let\endsidewayslisting\end@rotfloat
+\makeatother
 
 % setup captions
 \DeclareCaptionStyle{spec}{style=base,font={small,sf},labelfont=bf,labelsep=quad}
