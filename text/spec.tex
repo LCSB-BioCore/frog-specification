@@ -20,7 +20,7 @@ For model publishing purposes, the files may be stored in the OMEX format, as sp
 
 The required files that must be present in a FROG report are listed in \cref{tab:files}. Formatting and contents of the files are described in the following sections (as referenced from the table). Additionally, the file format is specified by OMEX via \texttt{identifiers.org}; the current format versions are listed in \cref{tab:omex}.
 
-\begin{table}[p]\tablefont
+\begin{table}\tablefont
 \begin{tabular}{lp{.3\linewidth}ll}
 \toprule
 File name & Contents & Format & Description \\
@@ -55,7 +55,7 @@ File name & Contents & Format & Description \\
 \label{tab:files}
 \end{table}
 
-\begin{table}[p]\tablefont
+\begin{table}\tablefont
 \begin{tabular}{lp{.6\linewidth}}
 \toprule
 File name & OMEX identifier \\
@@ -121,20 +121,20 @@ Solver status fields must contain exactly one of the above keywords.
 \subsection{Metadata file}
 \label{sec:meta}
 
-The contents of the metadata file is formatted as JSON that contains a single JSON object. The main purposes of the file include:
+The contents of the metadata file is formatted as JSON that contains a single JSON object. The main purposes of the file include:\todo{should we explicitly list FROG version?}
 \begin{itemize}
 \item identifying the model file being described,
 \item describing the software that was used to generate the report.
 \end{itemize}
 
-The expected properties and sub-properties of the JSON object are listed in \cref{tab:metafields}. The fields labeled as `required' must be present in a FROG report. The fields labeled as `optional' should be present and the software should implement generation and testing of these fields, but the report is valid even with the models missing.
+The expected properties and sub-properties of the JSON object are listed in \cref{tab:metadata}. The fields labeled as `required' must be present in a FROG report. The fields labeled as `optional' should be present and the software should implement generation and testing of these fields, but the report is valid even with the models missing.
 
 The JSON Schema that may be used to validate the JSON metadata format is available from \url{\frogrepobase/schema/frog-metadata-v1.json}.
 
-\begin{table}[p]\tablefont
+\begin{table}\tablefont
 \begin{tabular}{llp{30em}}
 \toprule
-Field & Presence & Description \\
+Value & Presence & Description \\
 \midrule
 \verb|model.filename|
  & required
@@ -191,7 +191,7 @@ Field & Presence & Description \\
 \bottomrule
 \end{tabular}
 \caption[Contents of the FROG metadata file.]{Contents of the FROG metadata file. Names that contain an arrow ($\to$) represent properties of nested objects.}
-\label{tab:metafields}
+\label{tab:metadata}
 \end{table}
 
 \subsection{Objective value report file}
@@ -199,7 +199,7 @@ Field & Presence & Description \\
 
 For each objective that is described by the model file, the objective value report contains one entry row that describes the optimal objective value found by the flux balance analysis algorithm (\cref{sec:algos}) for each objective in the model. The required columns and the format and semantics of the entries is specified in~\cref{tab:objfields}.
 
-\begin{table}[p]\tablefont
+\begin{table}\tablefont
 \begin{tabular}{llp{30em}}
 \toprule
 Column & Format & Value \\
@@ -236,7 +236,7 @@ In case the base FBA problem for a given objective is infeasible, i.e., the obje
 
 \todo{rename flux to reference\_flux?}
 
-\begin{table}[p]\tablefont
+\begin{table}\tablefont
 \begin{tabular}{llp{30em}}
 \toprule
 Column & Format & Value \\
@@ -286,7 +286,7 @@ For each objective that is described by the model file and for each reaction, th
 
 The used gene deletion algorithm must be compatible with the single gene knockout procedure described in~\cref{sec:algos}.
 
-\begin{table}[p]\tablefont
+\begin{table}\tablefont
 \begin{tabular}{llp{30em}}
 \toprule
 Column & Format & Value \\
@@ -322,7 +322,7 @@ Column & Format & Value \\
 
 For each objective that is described by the model file and for each reaction, the reaction deletion report contains an entry that describes the achievable objective value if the given reaction is deleted from the model, as specified in \cref{sec:algos}. The required columns and the format and semantics of the entries is specified in~\cref{tab:rxnsfields}.
 
-\begin{table}[p]\tablefont
+\begin{table}\tablefont
 \begin{tabular}{llp{30em}}
 \toprule
 Column & Format & Value \\
