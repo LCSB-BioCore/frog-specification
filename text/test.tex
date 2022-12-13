@@ -106,7 +106,7 @@ Value & Importance & Failure semantics \\
 
 Entries in the tabular report files are compared in pairs of equal keys from both files, as listed in \cref{tab:cmpvals}. Entry field \texttt{model} is not compared across the reports, but must be equal to the \texttt{model.filename} value in the metadata file of the corresponding report.
 
-Other fields are compared using the plain string or inexact numeric semantic, following \cref{tab:cmpvals}. As the only exception, comparison of reference flux solutions must be compared to the range given by files, as described in \cref{sec:cmpreference}.
+Other fields are compared using the plain string or inexact numeric comparison semantic, following \cref{tab:cmpvals}. As the only exception, comparison of reference flux solutions must be compared to the range given by files, as described in \cref{sec:cmpreference}. For comparison, all numeric fields are considered to be optional; other fields are required.
 
 \begin{table}\tablefont
 \begin{tabular}{lllll}
