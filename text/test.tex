@@ -46,7 +46,7 @@ If not marked otherwise, FROG software must treat the numeric values as inexact 
 \end{itemize}
 
 For values $a, b$, the approximate equality may be evaluated mathematically as follows:
-\[\left(|a-b|<T_{\text{abs}}\right) \lor \left(|a-b|<T_{\text{rel}}\cdot \max\left\{|a|, |b|\right\}\right) \]
+\[|a-b|<T_{\text{abs}} + T_{\text{rel}}\cdot \max\left\{|a|, |b|\right\} \]
 
 FROG software should use default tolerance values that are close to $T_\text{abs}=10^{-6}$, $T_\text{rel}=10^{-4}$.
 

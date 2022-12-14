@@ -121,7 +121,7 @@ Solver status fields must contain exactly one of the above keywords.
 \subsection{Metadata file}
 \label{sec:meta}
 
-The contents of the metadata file is formatted as JSON that contains a single JSON object. The main purposes of the file include:\todo{should we explicitly list FROG version?}
+The contents of the metadata file is formatted as JSON that contains a single JSON object. The main purposes of the file include:
 \begin{itemize}
 \item identifying the model file being described,
 \item describing the software that was used to generate the report.
@@ -194,7 +194,7 @@ Property & Presence & Value description \\
  \\
 \verb|software|$\to\ast\to$\verb|configuration|
  & optional
- & sub-object with a free-form description of the used software configuration
+ & sub-object with a free-form description of the used software configuration (such as solver options or commandline parameters)
  \\
 \bottomrule
 \end{tabular}
