@@ -2,7 +2,7 @@
 \label{chap:spec}
 
 A FROG report contains information about one model present in one file.
-The report consists of several files that must be saved in a single directory structure, such as in a single folder or in a single subdirectory of an archive file (see \cref{sec:archives}).
+The report consists of several files that must be saved in a single directory structure, such as in a single folder or in a single sub-directory of an archive file (see \cref{sec:archives}).
 Independently of the storage method, the report files should be extractable into a single filesystem-level directory to allow easy data access for various tools.
 
 \section{Archive files with FROG reports}
@@ -11,7 +11,7 @@ Independently of the storage method, the report files should be extractable into
 FROG reports may be stored and distributed in archives of formats such as ZIP (with extension \texttt{.zip}) or tarballs (with extensions \texttt{.tar.gz} or \texttt{.tar.bz2}).
 Tool authors should ensure that the chosen compression method is available on as many platforms as possible. Using ZIP archives is recommended.
 
-The archive file must contain the report files in the top-level directory (i.e., no subdirectories should be used).
+The archive file must contain the report files in the top-level directory (i.e., no sub-directories should be used).
 
 For model publishing purposes, the files may be stored in the OMEX format, as specified by \citeauthor{bergmann2014omex}. The OMEX format identifiers for individual FROG files are listed in~\cref{sec:files} (\cref{tab:omex}).
 
@@ -129,7 +129,7 @@ The contents of the metadata file is formatted as JSON that contains a single JS
 
 The expected properties and sub-properties of the JSON object are listed in \cref{tab:metadata}. The fields labeled as `required' must be present in a FROG report. The fields labeled as `optional' should be present and the software should implement generation and testing of these fields, but the report is valid even with the models missing.
 
-The JSON Schema that may be used to validate the JSON metadata format is available from the specificationrepository\footnote{\url{\frogrepobase/schema/frog-metadata-v1.json}}.
+The JSON Schema that may be used to validate the JSON metadata format is available from the specification repository\footnote{\url{\frogrepobase/schema/frog-metadata-v1.json}}.
 
 \begin{table}\tablefont
 \begin{tabular}{llp{30em}}
@@ -146,7 +146,7 @@ Property & Presence & Value description \\
  \\
 \verb|model_filename|
  & required
- & expected basename of the model file, such as \verb|e_coli_core.xml|
+ & expected base name of the model file, such as \verb|e_coli_core.xml|
  \\
 \verb|model_md5|
  & required
@@ -194,7 +194,7 @@ Property & Presence & Value description \\
  \\
 \verb|software|$\to\ast\to$\verb|configuration|
  & optional
- & sub-object with a free-form description of the used software configuration (such as solver options or commandline parameters)
+ & sub-object with a free-form description of the used software configuration (such as solver options or command line parameters)
  \\
 \bottomrule
 \end{tabular}
@@ -214,7 +214,7 @@ Column & Format & Value \\
 \midrule
 \verb|model|
  & text
- & basename of the file, matching \verb|model.filename| in the metadata file
+ & base name of the file, matching \verb|model.filename| in the metadata file
  \\
 \verb|objective|
  & text
@@ -251,7 +251,7 @@ Column & Format & Value \\
 \midrule
 \verb|model|
  & text
- & basename of the file, matching \verb|model.filename| in the metadata file
+ & base name of the file, matching \verb|model.filename| in the metadata file
  \\
 \verb|objective|
  & text
@@ -301,7 +301,7 @@ Column & Format & Value \\
 \midrule
 \verb|model|
  & text
- & basename of the file, matching \verb|model.filename| in the metadata file
+ & base name of the file, matching \verb|model.filename| in the metadata file
  \\
 \verb|objective|
  & text
@@ -337,7 +337,7 @@ Column & Format & Value \\
 \midrule
 \verb|model|
  & text
- & basename of the file, matching \verb|model.filename| in the metadata file
+ & base name of the file, matching \verb|model.filename| in the metadata file
  \\
 \verb|objective|
  & text
