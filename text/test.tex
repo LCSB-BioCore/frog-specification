@@ -14,11 +14,11 @@ Individual values present in the models are treated differently depending on the
 \item \textbf{Informative value} is a value that is generally variable and may differ between FROG runs, and is useful only as a source of information and metadata for purposes not directly related to model analysis such as error debugging and metadata collection. Typical informative values are the URLs and versions of models and software tools.
 \end{itemize}
 
-By default, the individual values are compared by simple equality (the same strings are the same value, different strings are considered a comparison failure). Numeric values are treated as inexact (see \cref{sec:inexact}). Several exceptional cases given by the specification (such as the reference solutions) are treated differently (see \cref{sec:cmpdata}).
+By default, the individual values are compared by simple equality (the same strings are the same value, different strings are considered a comparison failure). Numeric values are treated as inexact (see \cref{sec:inexact}), unless specified otherwise. Several exceptional cases given by the specification (such as the reference solutions) are treated differently (see \cref{sec:cmpdata}).
 
-The output of comparison is a set of messages of various severity (errors, warnings, information, optional debug information). Comparison process should report any differences found between the compared reports following the scheme in \cref{tab:importance}. The information gives the model user a sufficient information to see and evaluate the possible problems that may occur while reproducing the model author's results.
+The output of comparison is a set of messages of various severity (errors, warnings, information, optional debug information). Comparison process should report any differences found between the compared reports following the scheme in \cref{tab:importance}. Use of this scheme gives the model user a sufficient information to efficiently evaluate the possible problems that may occur while reproducing the model author's results.
 
-The software must summarize the comparison outcome based on the maximum message severity. If no errors or warnings were generated, the comparison outcome is marked as `FROG reproducible'. If warnings were generated but no errors, the outcome is `FROG reproducible with warnings'. If any errors were generated, the outcome is `Not reproducible'.
+The software should summarize the comparison outcome based on the maximum message severity. If no errors or warnings were generated, the comparison outcome should be marked as `FROG reproducible'. If warnings were generated but no errors, the outcome should be `FROG reproducible with warnings'. If any errors were generated, the outcome should be marked as `Not reproducible'.
 
 \begin{table}\tablefont
 \begin{tabular}{rcccc}
@@ -52,34 +52,45 @@ FROG software should use default tolerance values that are close to $T_\text{abs
 
 \section{Metadata comparison}
 
-The values stored in JSON object fields are compared in pairs that share the equal JSON object key (or key sequence in case of nested objects, sometimes called ``property path''). The comparison semantics is given by importance value for the keys as listed in \cref{tab:cmpmeta}.
+The values stored in JSON object fields are compared in pairs that share the equal JSON object key (or key sequence in case of nested objects, sometimes called ``property path'').
+The comparison semantics is given by importance value for the keys as listed in \cref{tab:cmpmeta}.
+
+In order to produce better reports, software may use a specialized version-compatibility check that follows the semantics of SemVer~\cite{semver} instead of the exact string check for comparing the contents of fields \verb|frog_version| and \verb|model_version|.
 
 \begin{table}\tablefont
 \begin{tabular}{llp{30em}}
 \toprule
 Value & Importance & Failure semantics \\
 \midrule
-\verb|model.filename|
+\verb|frog_version|
+ & consistent
+ & generated report semantics may differ
+ \\
+\verb|frog_id|
+ & informative
+ & identifier of the FROG report that is unique within a given data repository
+ \\
+\verb|model_filename|
  & consistent
  & compared models may differ
  \\
-\verb|model.md5|
+\verb|model_md5|
  & consistent
  & compared model data may differ
  \\
-\verb|model.sha256|
+\verb|model_sha256|
  & consistent
  & compared model data may differ
  \\
-\verb|model.url|
+\verb|model_file_url|
  & informative
  & used for resolving problems with base data
  \\
-\verb|model.development.url|
+\verb|model_development_url|
  & informative
  & used for resolving reproducibility failures
  \\
-\verb|model.version|
+\verb|model_version|
  & consistent
  & compared models likely differ
  \\
@@ -89,11 +100,7 @@ Value & Importance & Failure semantics \\
  \\
 \verb|software|$\to$ \dots
  & informative
- & used for reproducing the original model interpretation
- \\
-\verb|solver|$\to$ \dots
- & informative
- & may explain numerical errors
+ & useful for debugging and possibly reproducing the original model interpretation
  \\
 \bottomrule
 \end{tabular}

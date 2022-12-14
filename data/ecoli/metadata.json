@@ -1,0 +1,27 @@
+{
+  "frog_version": "0.0.2",
+  "frog_id": "e_coli_core.xml-cobrapy-glpk",
+  "model_filename": "e_coli_core.xml",
+  "model_md5": "4574760460afe9e1b3388dc15f354706",
+  "model_sha256": "b4db506aeed0e434c1f5f1fdd35feda0dfe5d82badcfda0e9d1342335ab31116",
+  "software": {
+    "frog": {
+      "name": "fbc_curation",
+      "version": "0.2.2",
+      "url": "https://doi.org/10.5281/zenodo.3708271"
+    },
+    "cobra": {
+      "name": "cobrapy",
+      "version": "0.26.0",
+      "url": "https://github.com/opencobra/cobrapy"
+    },
+    "solver": {
+      "name": "GLPK",
+      "version": "1.0.1",
+      "configuration": {
+        "tm_lim": 60000
+      }
+    }
+  },
+  "environment": "posix, Linux, 5.15.0-53-generic"
+}

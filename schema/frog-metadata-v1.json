@@ -1,375 +1,90 @@
 {
-  "title": "FrogReport",
-  "description": "Definition of the FROG standard.",
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://identifiers.org/combine.specifications:frog-metadata-schema-v1",
+  "title": "FROG Metadata",
+  "description": "Schema of the JSON metadata file to be used in the FROG reports",
   "type": "object",
   "properties": {
-    "metadata": {
-      "$ref": "#/definitions/FrogMetaData"
+    "frog_version": {
+      "type": "string",
+      "description": "version of the FROG standard"
     },
-    "objectives": {
-      "$ref": "#/definitions/FrogObjectives"
+    "model_filename": {
+      "type": "string",
+      "description": "name of the file described by the report"
     },
-    "fva": {
-      "$ref": "#/definitions/FrogFVA"
+    "model_md5": {
+      "type": "string",
+      "description": "hex-encoded MD5 hash of the model file"
     },
-    "reaction_deletions": {
-      "$ref": "#/definitions/FrogReactionDeletions"
+    "model_sha256": {
+      "type": "string",
+      "description": "hex-encoded SHA256 hash of the model file"
     },
-    "gene_deletions": {
-      "$ref": "#/definitions/FrogGeneDeletions"
-    }
-  },
-  "required": [
-    "metadata",
-    "objectives",
-    "fva",
-    "reaction_deletions",
-    "gene_deletions"
-  ],
-  "definitions": {
-    "Tool": {
-      "title": "Tool",
-      "description": "Tool description.",
+    "model_file_url": {
+      "type": "string",
+      "description": "URL from where model file can be obtained"
+    },
+    "model_development_url": {
+      "type": "string",
+      "description": "URL from where information about model development can be obtained"
+    },
+    "model_version": {
+      "type": "string",
+      "description": "version of the model file"
+    },
+    "frog_id": {
+      "type": "string",
+      "description": "identifier of the FROG report unique within a repository"
+    },
+    "environment": {
+      "type": "string",
+      "description": "free-text description of software environment used to generate the environment, such as the operating system"
+    },
+    "software": {
       "type": "object",
-      "properties": {
-        "name": {
-          "title": "Name",
-          "description": "Name of tool/software/library.",
-          "type": "string"
-        },
-        "version": {
-          "title": "Version",
-          "description": "Version of tool/software/library.",
-          "type": "string"
-        },
-        "url": {
-          "title": "Url",
-          "description": "URL of tool/software/library.",
-          "type": "string"
+      "description": "description of individual software components used to generate the report",
+      "patternProperties": {
+        "^.*$": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "string",
+              "description": "name of the software"
+            },
+            "version": {
+              "type": "string",
+              "description": "version of the software"
+            },
+            "url": {
+              "type": "string",
+              "description": "URL from where the software can be obtained"
+            },
+            "configuration": {
+              "type": "object",
+              "description": "free-form description of configuration options and values used to set up the software, such as solver parameters"
+            }
+          },
+          "additionalProperties": false,
+          "required": [
+            "name",
+            "version"
+          ]
         }
       },
       "required": [
-        "name"
-      ]
-    },
-    "Creator": {
-      "title": "Creator",
-      "description": "Creator/curator in ModelHistory and other COMBINE formats.\n\nExtended by optional orcid.",
-      "type": "object",
-      "properties": {
-        "familyName": {
-          "title": "Familyname",
-          "type": "string"
-        },
-        "givenName": {
-          "title": "Givenname",
-          "type": "string"
-        },
-        "email": {
-          "title": "Email",
-          "type": "string"
-        },
-        "organization": {
-          "title": "Organization",
-          "type": "string"
-        },
-        "site": {
-          "title": "Site",
-          "type": "string"
-        },
-        "orcid": {
-          "title": "Orcid",
-          "type": "string"
-        }
-      },
-      "required": [
-        "familyName",
-        "givenName"
-      ]
-    },
-    "FrogMetaData": {
-      "title": "FrogMetaData",
-      "description": "FROG metadata.",
-      "type": "object",
-      "properties": {
-        "model.location": {
-          "title": "Model.Location",
-          "description": "Location of the model in the COMBINE archive for which the FROG analysis was performed.",
-          "type": "string"
-        },
-        "model.md5": {
-          "title": "Model.Md5",
-          "description": "MD5 hash of model",
-          "type": "string"
-        },
-        "frog_id": {
-          "title": "Frog Id",
-          "description": "Id for the FROG analysis. All frog_ids within an archive must be unique.",
-          "type": "string"
-        },
-        "frog.software": {
-          "title": "Frog.Software",
-          "description": "Software used to run FROG (e.g. 'fbc_curation'",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Tool"
-            }
-          ]
-        },
-        "frog.curators": {
-          "title": "Frog.Curators",
-          "description": "Curators which executed the FROG analysis.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Creator"
-          }
-        },
-        "software": {
-          "title": "Software",
-          "description": "Software used to run FBC (e.g. 'cameo', 'COBRA', 'cobrapy'",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Tool"
-            }
-          ]
-        },
-        "solver": {
-          "title": "Solver",
-          "description": "Solver used to solve LP problem (e.g. 'CPLEX', 'GUROBI', 'GLPK').",
-          "allOf": [
-            {
-              "$ref": "#/definitions/Tool"
-            }
-          ]
-        },
-        "environment": {
-          "title": "Environment",
-          "description": "Execution environment such as Linux.",
-          "type": "string"
-        }
-      },
-      "required": [
-        "model.location",
-        "frog_id",
-        "frog.software",
-        "frog.curators",
-        "software",
+        "frog",
         "solver"
       ]
     },
-    "StatusCode": {
-      "title": "StatusCode",
-      "description": "Status code for simulation results.",
-      "enum": [
-        "optimal",
-        "infeasible"
-      ],
-      "type": "string"
-    },
-    "FrogObjective": {
-      "title": "FrogObjective",
-      "description": "Frog Objective.",
-      "type": "object",
-      "properties": {
-        "model": {
-          "title": "Model",
-          "type": "string"
-        },
-        "objective": {
-          "title": "Objective",
-          "type": "string"
-        },
-        "status": {
-          "$ref": "#/definitions/StatusCode"
-        },
-        "value": {
-          "title": "Value",
-          "type": "number"
-        }
-      },
-      "required": [
-        "model",
-        "objective",
-        "status",
-        "value"
-      ]
-    },
-    "FrogObjectives": {
-      "title": "FrogObjectives",
-      "description": "Definition of FROG Objectives.",
-      "type": "object",
-      "properties": {
-        "objectives": {
-          "title": "Objectives",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FrogObjective"
-          }
-        }
-      },
-      "required": [
-        "objectives"
-      ]
-    },
-    "FrogFVASingle": {
-      "title": "FrogFVASingle",
-      "description": "Frog FVA.",
-      "type": "object",
-      "properties": {
-        "model": {
-          "title": "Model",
-          "type": "string"
-        },
-        "objective": {
-          "title": "Objective",
-          "type": "string"
-        },
-        "reaction": {
-          "title": "Reaction",
-          "type": "string"
-        },
-        "flux": {
-          "title": "Flux",
-          "type": "number"
-        },
-        "status": {
-          "$ref": "#/definitions/StatusCode"
-        },
-        "minimum": {
-          "title": "Minimum",
-          "type": "number"
-        },
-        "maximum": {
-          "title": "Maximum",
-          "type": "number"
-        },
-        "fraction_optimum": {
-          "title": "Fraction Optimum",
-          "type": "number"
-        }
-      },
-      "required": [
-        "model",
-        "objective",
-        "reaction",
-        "status",
-        "fraction_optimum"
-      ]
-    },
-    "FrogFVA": {
-      "title": "FrogFVA",
-      "description": "Definition of FROG FVA.",
-      "type": "object",
-      "properties": {
-        "fva": {
-          "title": "Fva",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FrogFVASingle"
-          }
-        }
-      },
-      "required": [
-        "fva"
-      ]
-    },
-    "FrogReactionDeletion": {
-      "title": "FrogReactionDeletion",
-      "description": "Frog reaction deletion.",
-      "type": "object",
-      "properties": {
-        "model": {
-          "title": "Model",
-          "type": "string"
-        },
-        "objective": {
-          "title": "Objective",
-          "type": "string"
-        },
-        "reaction": {
-          "title": "Reaction",
-          "type": "string"
-        },
-        "status": {
-          "$ref": "#/definitions/StatusCode"
-        },
-        "value": {
-          "title": "Value",
-          "type": "number"
-        }
-      },
-      "required": [
-        "model",
-        "objective",
-        "reaction",
-        "status"
-      ]
-    },
-    "FrogReactionDeletions": {
-      "title": "FrogReactionDeletions",
-      "description": "Definition of FROG Reaction deletions.",
-      "type": "object",
-      "properties": {
-        "deletions": {
-          "title": "Deletions",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FrogReactionDeletion"
-          }
-        }
-      },
-      "required": [
-        "deletions"
-      ]
-    },
-    "FrogGeneDeletion": {
-      "title": "FrogGeneDeletion",
-      "description": "Frog gene deletion.",
-      "type": "object",
-      "properties": {
-        "model": {
-          "title": "Model",
-          "type": "string"
-        },
-        "objective": {
-          "title": "Objective",
-          "type": "string"
-        },
-        "gene": {
-          "title": "Gene",
-          "type": "string"
-        },
-        "status": {
-          "$ref": "#/definitions/StatusCode"
-        },
-        "value": {
-          "title": "Value",
-          "type": "number"
-        }
-      },
-      "required": [
-        "model",
-        "objective",
-        "gene",
-        "status"
-      ]
-    },
-    "FrogGeneDeletions": {
-      "title": "FrogGeneDeletions",
-      "description": "Definition of FROG Gene deletions.",
-      "type": "object",
-      "properties": {
-        "deletions": {
-          "title": "Deletions",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FrogGeneDeletion"
-          }
-        }
-      },
-      "required": [
-        "deletions"
-      ]
-    }
-  }
+    "additionalProperties": false
+  },
+  "additionalProperties": false,
+  "required": [
+    "frog_version",
+    "model_filename",
+    "model_md5",
+    "software",
+    "environment"
+  ]
 }

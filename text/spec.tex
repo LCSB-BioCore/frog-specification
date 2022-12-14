@@ -25,7 +25,7 @@ The required files that must be present in a FROG report are listed in \cref{tab
 \toprule
 File name & Contents & Format & Description \\
 \midrule
-\texttt{00\_metadata.json}
+\texttt{metadata.json}
  & Basic information about the model file, information about the FROG report software.
  & JSON (\cref{sec:json})
  & \cref{sec:meta}
@@ -60,7 +60,7 @@ File name & Contents & Format & Description \\
 \toprule
 File name & OMEX identifier \\
 \midrule
-\texttt{00\_metadata.json}
+\texttt{metadata.json}
  & \url{https://identifiers.org/combine.specifications:frog-metadata-version-1}
  \\
 \texttt{01\_objective.tsv}
@@ -102,7 +102,7 @@ All fields in a FROG TSV file must be encoded in UTF-8 and must not contain tab 
 
 The format is additionally described by IANA as media type `tab-separated-values'~\cite{ianatsv}.
 
-As an example, the TSV file in~\cref{lst:ecoli-obj} contains one header row and one entry row, and te entry row contains (in order) 2 plain text values, 1 objective status value, and 1 numeric value. For clarity, the listing highlights the tab characters with light gray.
+As an example, the TSV file in~\cref{lst:ecoli-obj} contains one header row and one entry row, and the entry row contains (in order) 2 plain text values, 1 objective status value, and 1 numeric value. For clarity, the listing highlights the tab characters with light gray.
 
 \subsubsection{Numeric and special values in TSV files}
 \emph{Numeric} fields must be converted to decimal representation. The decimal representation may include a leading minus sign, decimal point, and an integer exponent separated by \verb|e| (for example, valid encodings of $-1234.5\times10^2$ include \verb|-123450|, \verb|-12.345e4|, and \verb|-12345000e-2|). Rounding of non-representable and infinite numbers may be performed, but it should not invalidate the stored information with respect to the report comparison methodology, as described in~\cref{sec:cmpdata}.
@@ -134,29 +134,37 @@ The JSON Schema that may be used to validate the JSON metadata format is availab
 \begin{table}\tablefont
 \begin{tabular}{llp{30em}}
 \toprule
-Value & Presence & Description \\
+Property & Presence & Value description \\
 \midrule
-\verb|model.filename|
+\verb|frog_version|
+ & required
+ & 3-number tagged version string of the FROG standard that is followed by the report, such as \verb|0.0.2|
+ \\
+\verb|frog_id|
+ & optional
+ & identifier of the FROG report that is unique within a given data repository
+ \\
+\verb|model_filename|
  & required
  & expected basename of the model file, such as \verb|e_coli_core.xml|
  \\
-\verb|model.md5|
+\verb|model_md5|
  & required
  & 32-hexadecimal-digit MD5 hash~\cite{rfc1321} of the model file contents
  \\
-\verb|model.sha256|
+\verb|model_sha256|
  & optional
  & 64-hexadecimal-digit SHA256 hash~\cite{national2008secure} of the model file contents
  \\
-\verb|model.url|
+\verb|model_file_url|
  & optional
  & URL where the model file can be obtained, preferably pointing to a long-term archival repository
  \\
-\verb|model.development.url|
+\verb|model_development_url|
  & optional
  & URL of a website or public repository where the model is developed, preferably offering a chance to contact the model authors or submit corrections of the model
  \\
-\verb|model.version|
+\verb|model_version|
  & optional
  & version string of the model, if available
  \\
@@ -164,33 +172,33 @@ Value & Presence & Description \\
  & required
  & free-text description of the software environment used to run FROG analysis tools, such as from \verb|uname -a|
  \\
-\verb|software|$\to$\verb|name|
+\verb|software|$\to$\verb|frog|
  & required
- & name of the FROG report generator software
+ & sub-object with a description of the FROG report generator (see below)
  \\
-\verb|software|$\to$\verb|version|
+\verb|software|$\to$\verb|solver|
+ & required
+ & sub-object with a description of the solver software
+ \\\addlinespace
+\verb|software|$\to\ast\to$\verb|name|
+ & required
+ & name of the given software
+ \\
+\verb|software|$\to\ast\to$\verb|version|
  & required
  & version of the software
  \\
-\verb|software|$\to$\verb|url|
+\verb|software|$\to\ast\to$\verb|url|
  & optional
- & URL of the software homepage
+ & URL from where the software may be obtained
  \\
-\verb|solver|$\to$\verb|name|
- & required
- & name of the solver used to compute the reported values
- \\
-\verb|solver|$\to$\verb|version|
- & required
- & version of the solver\todo{what about solver settings?}
- \\
-\verb|solver|$\to$\verb|url|
+\verb|software|$\to\ast\to$\verb|configuration|
  & optional
- & URL of the solver homepage
+ & sub-object with a free-form description of the used software configuration
  \\
 \bottomrule
 \end{tabular}
-\caption[Contents of the FROG metadata file.]{Contents of the FROG metadata file. Names that contain an arrow ($\to$) represent properties of nested objects.}
+\caption[Contents of the FROG metadata file.]{Contents of the FROG metadata file. Names that contain an arrow ($\to$) represent properties of nested objects; asterisk ($\ast$) stands for any sub-object.}
 \label{tab:metadata}
 \end{table}
 
