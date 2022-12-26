@@ -9,7 +9,7 @@ https://fbc-curation.readthedocs.io/en/latest/ .
 This repository contains the working draft of the FROG format specification.
 The main target is to provide a clear, unambiguous reference for software
 authors and curators on how to implement FROG report generation software, and
-how to work with frog report contents.
+how to work with FROG report contents.
 
 ## Getting the specification
 
