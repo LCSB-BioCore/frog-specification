@@ -1,0 +1,41 @@
+
+\chapter{miniFROG report format}
+\label{chap:mini}
+
+While the FROG analysis is helpful for new models, the task of retrospective curation of already published models demands comparison of model performance with results reported in the manuscript.
+This comparison should ensure that the right model version was shared, and that the model reproduces the published results.
+
+To facilitate the retrospective curation, `miniFROG' report serves as a template to specify key observations from the manuscript, and declare their agreement with a FROG report.
+That serves as a check of the reproducibility of the published data, with respect to the published model version.
+
+\section{miniFROG report fields}
+
+miniFROG report consists of a spreadsheet (or other accessible tabular data format) that must contain a set of entries that consist of the following labeled fields:
+\begin{itemize}
+\item \texttt{Publication Information} --- identifier of the publication, preferably a full citation accompanied with a DOI.
+\item \texttt{Organism Name} --- name of the organism, provided for reference.
+\item \texttt{Model Repository} --- name of the repository where the model is deposited, such as \texttt{BioModels}.
+\item \texttt{Model Identifier} --- deposition ID of the model, such as \texttt{BIOMD00000123}. For use in BioModels repository, the fields \texttt{Model Repository} and \texttt{Model Identifier} may be merged into a single field \texttt{BioModel Identifier}.
+\item \texttt{Simulation constraints} --- free text description of the additional constraints placed on the model, preferably with a reference to publication section that describes the constraints.
+\item \texttt{Gene/reaction involved in the constraint} --- identifier of the constrained object, if applicable.
+\item \texttt{Type of constraints in the simulation} --- free text description of the applied constraint; typically describing either a gene or reaction knockout, or a partial constraint to a fixed numeric bound.
+\item \texttt{Tools used for simulation} --- free text description of software tools used to run the simulation.
+\item \texttt{Results from publication} --- numeric output(s) obtained from the simulation and reported in the manuscript, preferably accompanied to a reference to exact publication section where the reesult is reported.
+\item \texttt{Results predicted from FROG} --- numeric values in a FROG analysis that should correspond to the simulation result, or is easily convertible to the simulation result using a simple formula or algorithm (use `remarks' field to describe the conversion process).
+\item \texttt{Type of F/R/O/G analysis} --- specify which part of FROG report contains the result predicted by FROG, preferably as a file name that contains the numeric value.
+\item \texttt{Line in FROG Report} --- specify what line of the filename specified by FROG analysis type contains the result predicted by FROG.
+\item \texttt{Validation of the simulation (Yes/No)} --- use a single work `Yes' or `No' to mark if FROG analysis was able to validate the simulation result. Note that failure to validate does not imply result invalidity, it merely flags a reproducibility problem in some of the many parts of the pipeline, including the FROG analysis software.
+\item \texttt{Remarks} --- include any extra information or references necessary to validate the analysis.
+\end{itemize}
+
+miniFROG report should be prepared manually using this template, and submitted as an additional file during model submission to a model repository, or attached to an existing model deposition in a repository.
+
+\section{miniFROG interpretation and examples}
+
+Importantly, miniFROG reports are supposed to be interpreted and evaluated by human curators.
+That is a required condition for the post-submission curation of models and publications that were created before FROG methodology was developed, and implies the human-accessible formating of most of the fields.
+As the main constraints, the fields must describe a clear way to find the corresponding results in a FROG report and in the publication, and must obviate a straightforward algorithm to compare the numeric values that can be followed by the curator.
+Conversely, software authors must not assume machine readability of the miniFROG results.
+
+As an example, the model BIOMD0000001046\footnote{\url{https://www.ebi.ac.uk/biomodels/BIOMD0000001046}} by \textcite{raman2005flux} is curated using FROG test suite and miniFROG standards.
+Additional examples of miniFROG reports are currently available online as spreadsheets\footnote{\url{https://docs.google.com/spreadsheets/d/1q4rre0guWh9Q2AYeBzfWHT-5cKBkMToc/edit\#gid=859592364}}.\todo{save this in the repository}
