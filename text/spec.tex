@@ -8,17 +8,16 @@ Independently of the storage method, the report files should be extractable into
 \section{Archive files with FROG reports}
 \label{sec:archives}
 
-FROG reports may be stored and distributed in archives of formats such as ZIP (with extension \texttt{.zip}) or tarballs (with extensions \texttt{.tar.gz} or \texttt{.tar.bz2}).
-Tool authors should ensure that the chosen compression method is available on as many platforms as possible. Using ZIP archives is recommended.
+FROG reports may be stored and distributed in archive files. The formats of archive file should be preferably ZIP, with file extension \texttt{.zip}. The archive file must contain the report files in the top-level directory (i.e., no sub-directories should be used).
 
-The archive file must contain the report files in the top-level directory (i.e., no sub-directories should be used).
-
-For model publishing purposes, the files may be stored in the OMEX format, as specified by \citeauthor{bergmann2014omex}. The OMEX format identifiers for individual FROG files are listed in~\cref{sec:files} (\cref{tab:omex}).
+For model publishing purposes, the files should be stored in the OMEX (Open Modeling EXchange) format together with the model, as specified by \citeauthor{bergmann2014omex}, and may optionally be accompanied by an annotation file that follows the OMEX metadata recommendations by \citeauthor{Neal2018}.
+The OMEX format identifiers for individual FROG files are listed in~\cref{sec:files} (\cref{tab:omex}).
 
 \section{Directory layout}
 \label{sec:files}
 
-The required files that must be present in a FROG report are listed in \cref{tab:files}. Formatting and contents of the files are described in the following sections (as referenced from the table). Additionally, the file format is specified by OMEX via \texttt{identifiers.org}; the current format versions are listed in \cref{tab:omex}.
+The required files that must be present in a FROG report are listed in \cref{tab:files}.
+The formatting and contents of the files are described in the following sections (as referenced in the table). Additionally, the file format is specified by OMEX via \texttt{identifiers.org}; the current format versions are listed in \cref{tab:omex}.
 
 \begin{table}\tablefont
 \begin{tabular}{lp{.3\linewidth}ll}
@@ -88,31 +87,34 @@ This section describes the encoding of information into file contents used by FR
 \subsection{JSON}
 \label{sec:json}
 
-JSON-formatted FROG report files must adhere to the JSON formatting as specified by RFC~8259~\cite{rfc8259}.
+JSON-formatted FROG report files must adhere to the JSON formatting specified by RFC~8259~\cite{rfc8259}.
 The character encoding of the JSON-formatted file must be UTF-8 (see \cite[][section 8.1]{rfc8259}).
 
-Individual files may require adherence to a specified JSON Schema~\cite{pezoa2016jsonschema}, which shall be provided in JSON format in the respective section that describe the files' contents.
+Individual files may require adherence to a specified JSON Schema~\cite{pezoa2016jsonschema}, which shall be provided in JSON format in the respective section that describes the files' contents.
 
 \subsection{TSV}
 \label{sec:tsv}
 
-TSV stands for Tab-Separated Values file. The format is defined as a matrix of text fields that do not contain characters for a tab and a newline (character values 9 and 10 respectively, commonly written as \verb|\t| and \verb|\n|), where the tab is used to separate individual per-column values in each row, and the newline is used to separate individual rows.
+TSV stands for Tab-Separated Values file. The format is defined as a matrix of text fields that do not contain characters for a tab and a newline (character values 9 and 10, respectively, commonly written as \verb|\t| and \verb|\n|), where the tab is used to separate individual per-column values in each row, and the newline is used to separate individual rows.
 
-All fields in a FROG TSV file must be encoded in UTF-8 and must not contain tab or newline characters. The first row of each FROG TSV file (a \emph{header row}) must contain column names as prescribed in the appropriate specification section. The columns must be present in the order prescribed by the specification. All other rows except for the header row are called \emph{entry rows}.
+All fields in a FROG TSV file must be encoded in UTF-8 and must not contain tab or newline characters.
+The first row of each FROG TSV file (a \emph{header row}) must contain column names as prescribed in the appropriate specification section. The columns must be present in the order prescribed by the specification.
+All other rows except for the header row are called \emph{entry rows}.
 
-The format is additionally described by IANA as media type `tab-separated-values'~\cite{ianatsv}.
+IANA describes the format as media type `tab-separated-values'~\cite{ianatsv}.
 
-As an example, the TSV file in~\cref{lst:ecoli-obj} contains one header row and one entry row, and the entry row contains (in order) 2 plain text values, 1 objective status value, and 1 numeric value. For clarity, the listing highlights the tab characters with light gray.
+For example, the TSV file in~\cref{lst:ecoli-obj} contains one header row and one entry row, and the entry row contains (in order) 2 plain text values, one objective status value, and one numeric value.
+For clarity, the listing highlights the tab characters with light gray.
 
 \subsubsection{Numeric and special values in TSV files}
-\emph{Numeric} fields must be converted to decimal representation. The decimal representation may include a leading minus sign, decimal point, and an integer exponent separated by \verb|e| (for example, valid encodings of $-1234.5\times10^2$ include \verb|-123450|, \verb|-12.345e4|, and \verb|-12345000e-2|). Rounding of non-representable and infinite numbers may be performed, but it should not invalidate the stored information with respect to the report comparison methodology, as described in~\cref{sec:cmpdata}.
+\emph{Numeric} fields must be converted to decimal representation. The decimal representation may include a leading minus sign, decimal point, and an integer exponent separated by \verb|e| (for example, valid encodings of $-1234.5\times10^2$ include \verb|-123450|, \verb|-12.345e4|, and \verb|-12345000e-2|). Rounding of non-representable and infinite numbers may be performed, but it should preserve the outcome of the report comparison, as described in~\cref{sec:cmpdata}.
 
-Missing numeric values must be represented by an empty string. Missing values typically occur when a value is expected in a field (such as in a place of optimal value of the model) but it can not be computed for some reason (such as model infeasibility).
+Missing numeric values must be represented by an empty string. Missing values typically occur when a value is expected in a field (such as in the place of the optimal value of the model), but it can not be computed for some reason (such as model infeasibility).
 
-\emph{Solver status} fields contain a special value that describes outcome of an optimization algorithm. FROG currently describes only 2 kinds of statuses:
+\emph{Solver status} fields contain a special value that describes the outcome of an optimization algorithm. FROG currently describes only two kinds of statuses:
 \begin{itemize}
-\item a feasible solution was found and the returned result is optimal, represented by keyword \verb|optimal|,
-\item a feasible solution was not found, represented by keyword \verb|infeasible|.
+\item a feasible solution was found, and the returned result is optimal, represented by the keyword \verb|optimal|,
+\item a feasible solution was not found, represented by the keyword \verb|infeasible|.
 \end{itemize}
 Solver status fields must contain exactly one of the above keywords.
 
@@ -121,13 +123,14 @@ Solver status fields must contain exactly one of the above keywords.
 \subsection{Metadata file}
 \label{sec:meta}
 
-The contents of the metadata file is formatted as JSON that contains a single JSON object. The main purposes of the file include:
+The metadata file's contents are formatted as JSON containing a single JSON object.
+The primary purposes of the file include the following:
 \begin{itemize}
 \item identifying the model file being described,
 \item describing the software that was used to generate the report.
 \end{itemize}
 
-The expected properties and sub-properties of the JSON object are listed in \cref{tab:metadata}. The fields labeled as `required' must be present in a FROG report. The fields labeled as `optional' should be present and the software should implement generation and testing of these fields, but the report is valid even with the models missing.
+The expected properties and sub-properties of the JSON object are listed in \cref{tab:metadata}. The fields labeled `required' must be present in a FROG report. The fields labeled as `optional' should be present, and the software should implement generation and testing of these fields, but the report is valid even with the models missing.
 
 The JSON Schema that may be used to validate the JSON metadata format is available from the specification repository\footnote{\url{\frogrepobase/schema/frog-metadata-v1.json}}.
 
@@ -205,7 +208,7 @@ Property & Presence & Value description \\
 \subsection{Objective value report file}
 \label{sec:obj}
 
-For each objective that is described by the model file, the objective value report contains one entry row that describes the optimal objective value found by the flux balance analysis algorithm (\cref{sec:algos}) for each objective in the model. The required columns and the format and semantics of the entries is specified in~\cref{tab:objfields}.
+For each objective that is described by the model file, the objective value report contains one entry row that describes the optimal objective value found by the flux balance analysis algorithm (\cref{sec:algos}) for each objective in the model. The required columns and the format and semantics of the entries are specified in~\cref{tab:objfields}.
 
 \begin{table}\tablefont
 \begin{tabular}{llp{30em}}
@@ -236,7 +239,8 @@ Column & Format & Value \\
 
 \subsection{Flux variability report file}
 \label{sec:fva}
-For each objective that is described by the model file and for each reaction, the flux variability report contains an entry that describes minimal, maximal, and reference flux value through the given reaction at optimal flux objective. The required columns and the format and semantics of the entries is specified in~\cref{tab:fvafields}. The values of minima and maxima should be generated by a flux variability analysis (see \cref{sec:algos}), and may be missing if the given subproblem is infeasible. The reference flux must be a valid optimal solution generated by a flux balance analysis; its value is only informative because the solution is typically not unique.
+For each objective described by the model file and for each reaction, the flux variability report contains an entry that describes the minimal, maximal, and reference flux value through the given reaction at the optimal flux objective. The required columns and the format and semantics of the entries are specified in~\cref{tab:fvafields}.
+A flux variability analysis should generate minima and maxima values (see \cref{sec:algos}) and may need to be included if the given subproblem is infeasible. The reference flux must be a valid optimal solution generated by a flux balance analysis; its value is only informative because the solution is typically not unique.
 
 In case the base FBA problem for a given objective is infeasible, i.e., the objective is marked as infeasible in the objective report file (see~\cref{sec:obj}), no entries for that objective must be added.
 
@@ -290,9 +294,9 @@ Column & Format & Value \\
 \subsection{Gene deletion report file}
 \label{sec:genes}
 
-For each objective that is described by the model file and for each reaction, the gene deletion report contains an entry that describes the achievable objective value if the given gene is deleted (i.e., `knocked out'). The required columns and the format and semantics of the entries is specified in~\cref{tab:genefields}.
+For each objective described by the model file and for each reaction, the gene deletion report contains an entry describing the achievable objective value if the given gene is deleted (i.e., `knocked out'). The required columns and the format and semantics of the entries are specified in~\cref{tab:genefields}.
 
-The used gene deletion algorithm must be compatible with the single gene knockout procedure described in~\cref{sec:algos}.
+The gene deletion algorithm must be compatible with the single gene knockout procedure described in~\cref{sec:algos}.
 
 \begin{table}\tablefont
 \begin{tabular}{llp{30em}}
@@ -328,7 +332,7 @@ Column & Format & Value \\
 \subsection{Reaction deletion report file}
 \label{sec:rxns}
 
-For each objective that is described by the model file and for each reaction, the reaction deletion report contains an entry that describes the achievable objective value if the given reaction is deleted from the model, as specified in \cref{sec:algos}. The required columns and the format and semantics of the entries is specified in~\cref{tab:rxnsfields}.
+For each objective described by the model file and for each reaction, the reaction deletion report contains an entry describing the achievable objective value if the given reaction is deleted from the model, as specified in \cref{sec:algos}. The required columns and the format and semantics of the entries are specified in~\cref{tab:rxnsfields}.
 
 \begin{table}\tablefont
 \begin{tabular}{llp{30em}}
