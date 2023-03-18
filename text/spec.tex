@@ -109,7 +109,7 @@ For clarity, the listing highlights the tab characters with light gray.
 \subsubsection{Numeric and special values in TSV files}
 \emph{Numeric} fields must be converted to decimal representation. The decimal representation may include a leading minus sign, decimal point, and an integer exponent separated by \verb|e| (for example, valid encodings of $-1234.5\times10^2$ include \verb|-123450|, \verb|-12.345e4|, and \verb|-12345000e-2|). Rounding of non-representable and infinite numbers may be performed, but it should preserve the outcome of the report comparison, as described in~\cref{sec:cmpdata}.
 
-Missing numeric values must be represented by an empty string. Missing values typically occur when a value is expected in a field (such as in the place of the optimal value of the model), but it can not be computed for some reason (such as model infeasibility).
+Missing numeric values must be represented by an empty field. Missing values typically occur when a value is expected in a field (such as in the place of the optimal value of the model), but it can not be computed for some reason (such as model infeasibility).
 
 \emph{Solver status} fields contain a special value that describes the outcome of an optimization algorithm. FROG currently describes only two kinds of statuses:
 \begin{itemize}
@@ -167,13 +167,17 @@ Property & Presence & Value description \\
  & optional
  & URL of a website or public repository where the model is developed, preferably offering a chance to contact the model authors or submit corrections of the model
  \\
+ \verb|model_reproducibility_url|
+  & optional
+  & URL of a website or a public repository that gives closer information on how to reproduce the results obtained using the model, such as a link to a reproducible notebook or to a test suite
+  \\
 \verb|model_version|
  & optional
  & version string of the model, if available
  \\
 \verb|environment|
  & required
- & free-text description of the software environment used to run FROG analysis tools, such as from \verb|uname -a|
+ & free-text description of the software and hardware environment used to run FROG analysis tools, such as the versions of operating system, the hardware platform and the software tools; if possible, this includes a pointer to a machine-readable information that reproduces the environment, such as a versioned docker image name, or a version-lock file for a package management system
  \\
 \verb|software|$\to$\verb|frog|
  & required

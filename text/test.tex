@@ -71,7 +71,7 @@ Value & Importance & Failure semantics \\
 \midrule
 \verb|frog_version|
  & consistent
- & generated report semantics may differ
+ & generated report semantics may differ among incompatible FROG versions; consistency may be checked with respect to semantic versioning~\cite{semver}
  \\
 \verb|frog_id|
  & informative
@@ -99,7 +99,7 @@ Value & Importance & Failure semantics \\
  \\
 \verb|model_version|
  & consistent
- & compared models likely differ
+ & compared models of different versions likely differ; consistency may be checked with respect to semantic versioning~\cite{semver}
  \\
 \verb|environment|
  & informative
