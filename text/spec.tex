@@ -300,12 +300,12 @@ Column & Format & Value \\
 \subsubsection{Compound termination status of reaction minimization and maximization}
 \label{sec:fvastatus}
 
-Reaction variability report (\cref{tab:fvafields}) specifies that the status of minimization and maximization the flux through the given reaction should be reported as a single solver status.
+Reaction variability report (\cref{tab:fvafields}) specifies that the status of minimization and maximization of the flux through the given reaction should be reported as a single solver status.
 While this is a theoretically valid assumption, there are cases where solvers fail due to numeric problems and only produce the optimal solution in one direction.
 
-To provide easily comparable reports in this case, this specification mandates that the solver status must be reported as optimal in case any optimal solution exists for any of the subproblems in the optimization.
+To provide deterministically comparable reports in this case, this specification mandates that the solver status must be reported as optimal in case any optimal solution exists for any of the subproblems in the optimization.
 As such, reporting optimality may be interpreted as merely stating that the software has found a proof that optimal solutions of the model can be found if the given variable becomes the optimization objective.
-Feasibility of individual subproblems as reported by the solver must still be reported properly by marking the respective maxima and minima as missing.
+Infeasibility of individual subproblems as reported by the solver must still be reported properly by marking the respective maxima and minima as missing.
 
 \subsection{Gene deletion report file}
 \label{sec:genes}
