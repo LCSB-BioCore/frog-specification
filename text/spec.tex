@@ -252,8 +252,6 @@ A flux variability analysis should generate minima and maxima values (see \cref{
 
 In case the base FBA problem for a given objective is infeasible, i.e., the objective is marked as infeasible in the objective report file (see~\cref{sec:obj}), no entries for that objective must be added.
 
-\todo{Since there are 2 optimizer runs for each row, why don't we have 2 solver statuses?}
-
 \todo{rename flux to reference\_flux?}
 
 \begin{table}\tablefont
@@ -279,7 +277,7 @@ Column & Format & Value \\
  \\
 \verb|status|
  & solver status
- & termination status of the flux variability analysis solver run for the reaction
+ & termination status of the flux variability analysis solver runs for the reaction, marked optimal if at least one of the subproblems yield a solution (see note in \cref{sec:fvastatus})
  \\
 \verb|minimum|
  & numeric
@@ -298,6 +296,16 @@ Column & Format & Value \\
 \caption{Columns present in FROG flux variability report file.}
 \label{tab:fvafields}
 \end{table}
+
+\subsubsection{Compound termination status of reaction minimization and maximization}
+\label{sec:fvastatus}
+
+Reaction variability report (\cref{tab:fvafields}) specifies that the status of minimization and maximization the flux through the given reaction should be reported as a single solver status.
+While this is a theoretically valid assumption, there are cases where solvers fail due to numeric problems and only produce the optimal solution in one direction.
+
+To provide easily comparable reports in this case, this specification mandates that the solver status must be reported as optimal in case any optimal solution exists for any of the subproblems in the optimization.
+As such, reporting optimality may be interpreted as merely stating that the software has found a proof that optimal solutions of the model can be found if the given variable becomes the optimization objective.
+Feasibility of individual subproblems as reported by the solver must still be reported properly by marking the respective maxima and minima as missing.
 
 \subsection{Gene deletion report file}
 \label{sec:genes}
