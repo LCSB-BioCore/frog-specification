@@ -15,13 +15,13 @@ jobs:
     container: { image: 'aergus/latex' }
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout
         with:
           fetch-depth: 0
       - name: Build
         run: make
       - name: Upload artifacts
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact
         with:
           name: FROG specification
           path: |
